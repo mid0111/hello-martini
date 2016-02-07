@@ -1,0 +1,19 @@
+machine:
+  golang:
+    version: 1.5
+
+dependencies:
+  override:
+    - make install
+
+test:
+  pre:
+    - go get github.com/axw/gocov/gocov
+    - go get github.com/mattn/goveralls
+    - if ! go get github.com/golang/tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
+
+  override:
+    - make test
+
+  post:
+    - goveralls -coverprofile=coverage/all.cov -service=circle-ci -repotoken=$COVERALLS_TOKEN
