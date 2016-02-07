@@ -12,7 +12,7 @@ die() {
 }
 
 for pkg in $(go list ./...); do
-    godep go test -v -coverprofile=coverage/tmp.cov $pkg || ERROR="Error testing $pkg"
+    godep go test -v -cover -race -coverprofile=coverage/tmp.cov $pkg || ERROR="Error testing $pkg"
     tail -n +2 coverage/tmp.cov >> coverage/all.cov || die "Unable to append coverage for $pkg"
 done
 
