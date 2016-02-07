@@ -1,10 +1,9 @@
-GO_PKGS=$(shell go list ./... | grep -v vendor/)
-
 build: install
 	go build -o ./bin/hello-martini
 
 test: install
-	go test $(GO_PKGS)
+	/bin/sh scripts/coverage.sh
+	go tool cover -html=coverage/all.cov -o coverage/coverage.html
 
 install:
 	gom install

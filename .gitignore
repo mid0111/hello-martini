@@ -8,6 +8,7 @@ gin-bin
 _obj
 _test
 bin
+coverage
 vendor
 
 # Architecture specific extensions/prefixes
