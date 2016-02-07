@@ -6,7 +6,7 @@ ERROR=""
 # Initialize profile.cov
 echo "mode: set" > coverage/all.cov
 
-function die() {
+die() {
     echo $*
     exit 1
 }
