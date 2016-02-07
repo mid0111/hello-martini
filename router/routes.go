@@ -6,6 +6,6 @@ import (
 
 func SetupRouter(router *martini.ClassicMartini) {
 	router.Get("/", func() string {
-		return "Hello world!"
+		return "Hello Martini!!"
 	})
 }

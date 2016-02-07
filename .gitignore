@@ -2,6 +2,7 @@
 *.o
 *.a
 *.so
+gin-bin
 
 # Folders
 _obj
