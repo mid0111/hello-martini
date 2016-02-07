@@ -6,15 +6,15 @@ Martini を使ったお勉強用プロジェクト
 ### Pre-requisites
 
 ```bash
-exports GO15VENDOREXPERIMENT=1
 go get github.com/mattn/gom
 ```
 
 ### Run
 
 ```bash
-git clone https://github.com/mid0111/hello-martini.git
-cd hello-martini
-gom install
+git clone https://github.com/mid0111/hello-martini.git && cd hello-martini
+
+export GO15VENDOREXPERIMENT=1
+make install
 go run server.go 
 ```
