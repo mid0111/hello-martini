@@ -6,4 +6,4 @@ test: install
 	go tool cover -html=coverage/all.cov -o coverage/coverage.html
 
 install:
-	gom install
+	go get -t -d -v ./...
