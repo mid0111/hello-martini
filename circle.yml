@@ -1,6 +1,7 @@
 machine:
   environment:
     IMPORT_PATH: "github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME"
+    GO15VENDOREXPERIMENT: 1
 
 dependencies:
   override:
@@ -17,4 +18,4 @@ test:
     - make test
 
   post:
-    - goveralls -coverprofile=coverage/all.cov -service=circle-ci -repotoken=$COVERALLS_TOKEN
+    - goveralls -coverprofile=coverage/profile.cov -service=circle-ci -repotoken=$COVERALLS_TOKEN

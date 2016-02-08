@@ -4,16 +4,24 @@
 ERROR=""
 
 # Initialize profile.cov
-echo "mode: set" > coverage/all.cov
+echo "mode: count" > coverage/profile.cov
 
 die() {
     echo $*
     exit 1
 }
 
-for pkg in $(go list ./...); do
-    godep go test -v -cover -race -coverprofile=coverage/tmp.cov $pkg || ERROR="Error testing $pkg"
-    tail -n +2 coverage/tmp.cov >> coverage/all.cov || die "Unable to append coverage for $pkg"
+# Standard go tooling behavior is to ignore dirs with leading underscors
+for dir in $(find . -maxdepth 10 -not -path './.git*' -not -path '*/_*' -not -path '*/vendor/*' -type d);
+do
+    if ls $dir/*.go &> /dev/null; then
+        godep go test -short -covermode=count -coverprofile=$dir/profile.tmp $dir
+        if [ -f $dir/profile.tmp ]
+        then
+            cat $dir/profile.tmp | tail -n +2 >> coverage/profile.cov || die "Unable to append coverage for $pkg"
+            rm $dir/profile.tmp
+        fi
+    fi
 done
 
 if [ ! -z "$ERROR" ]
